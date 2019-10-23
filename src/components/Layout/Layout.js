@@ -9,6 +9,7 @@ const Layout = ( props ) => {
       <main className="container-fluid">
         {props.children}
       </main>
+      <footer className="bg-dark">Footer</footer>
     </React.Fragment>
   )
 }

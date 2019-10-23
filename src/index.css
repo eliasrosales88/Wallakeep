@@ -4,6 +4,13 @@ body {
   font-family:"Ubuntu", "Helvetica Neue", sans-serif;
   height: 100vh;
   background-color: lightgray;
+  position: relative;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }
 
 code {
