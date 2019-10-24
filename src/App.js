@@ -10,7 +10,7 @@ function App() {
     <div>
       <ErrorBoundary>
         <Layout>
-          <p>App works!</p>
+          
       </Layout>
     </ErrorBoundary>
       </div>
