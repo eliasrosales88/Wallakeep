@@ -1,16 +1,19 @@
 import React from 'react';
 import './App.css';
 import Layout from './components/Layout/Layout';
+import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
 
 
 
 function App() {
   return (
     <div>
-      <Layout>
-        <p>App works!</p>
-     </Layout>
-    </div>
+      <ErrorBoundary>
+        <Layout>
+          <p>App works!</p>
+      </Layout>
+    </ErrorBoundary>
+      </div>
   );
 }
 
