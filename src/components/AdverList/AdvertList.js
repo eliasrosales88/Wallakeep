@@ -25,7 +25,9 @@ class AdvertList extends Component {
       <Fragment>
         <p>AdvertList works!</p>
         <div className="row justify-content-center">
-          {adverts}
+          <div className="col-xs-12 advertGrid">
+            {adverts}
+          </div>
         </div>
       </Fragment>
     )

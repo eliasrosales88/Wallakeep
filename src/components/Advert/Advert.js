@@ -7,7 +7,7 @@ const Advert = ( props ) => {
   
   return (
     <Fragment>
-      <div className="card col-xs-12 col-md-3 m-1">
+      <div className="card">
         <img src={ photo } className="card-img-top" alt={ name } />
         <div className="card-body">
           <h5 className="card-title">{ name }</h5>
