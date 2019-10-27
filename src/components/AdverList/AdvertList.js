@@ -16,8 +16,6 @@ class AdvertList extends Component {
   }
   
   componentDidMount () {
-    console.log(this.context);
-    
     if (!this.context.authenticated) {
       this.props.history.replace("/");
       return;

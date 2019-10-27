@@ -1,22 +1,46 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './App.css';
 import Layout from './containers/Layout/Layout';
 import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
 import { BrowserRouter } from "react-router-dom";
+import AuthContext from "./contexts/auth-context";
 
+class App extends Component {
+  state = {
+    authenticated: localStorage.getItem("authenticated") || false,
+    name: localStorage.getItem("name") || "",
+    lastname: localStorage.getItem("lastname") || "",
+  }
 
-function App() {
-  return (
-    <div>
-      <BrowserRouter>
-        <ErrorBoundary>
-            <Layout>
-              
-            </Layout>
-          </ErrorBoundary>
-      </BrowserRouter>
-      </div>
-  );
+  loginHandler = (state) => {
+    const { name, lastname } = state;
+    this.setState({
+        name: name,
+        lastname: lastname,
+        authenticated: true
+
+    })
+  }
+
+  render() {
+    return (
+      <div>
+        <BrowserRouter>
+          <ErrorBoundary>
+            <AuthContext.Provider value={{
+              name: this.state.name,
+              lastname: this.state.lastname,
+              authenticated: this.state.authenticated,
+              login: this.loginHandler
+            }}>
+              <Layout>
+                
+              </Layout>
+            </AuthContext.Provider>
+            </ErrorBoundary>
+        </BrowserRouter>
+        </div>
+    );
 }
-
+}
 export default App;
