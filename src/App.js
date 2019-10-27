@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import Layout from './components/Layout/Layout';
+import Layout from './containers/Layout/Layout';
 import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
 import { BrowserRouter } from "react-router-dom";
 
@@ -10,10 +10,10 @@ function App() {
     <div>
       <BrowserRouter>
         <ErrorBoundary>
-          <Layout>
-            
-          </Layout>
-        </ErrorBoundary>
+            <Layout>
+              
+            </Layout>
+          </ErrorBoundary>
       </BrowserRouter>
       </div>
   );
