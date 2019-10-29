@@ -7,19 +7,25 @@ import AuthContext from "./contexts/auth-context";
 
 class App extends Component {
   state = {
-    authenticated: localStorage.getItem("authenticated") || false,
     name: localStorage.getItem("name") || "",
     lastname: localStorage.getItem("lastname") || "",
+    authenticated: localStorage.getItem("authenticated") || false,
+    back: localStorage.getItem("back") || false
   }
 
   loginHandler = (state) => {
-    const { name, lastname } = state;
+    const { name, lastname, authenticated, back } = state;
+    console.log(state);
+    
     this.setState({
         name: name,
         lastname: lastname,
-        authenticated: true
+        authenticated: authenticated,
+        back: back
 
-    })
+    });
+    console.log(this.state);
+    
   }
 
   render() {
@@ -31,7 +37,8 @@ class App extends Component {
               name: this.state.name,
               lastname: this.state.lastname,
               authenticated: this.state.authenticated,
-              login: this.loginHandler
+              login: this.loginHandler,
+              back: this.state.back
             }}>
               <Layout>
                 

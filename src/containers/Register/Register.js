@@ -4,31 +4,27 @@ import { withRouter } from "react-router-dom";
 
 
 export class Register extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      name: "",
-      lastname: "",
-      authenticated: false
-    }
+  state = {
+    name: "",
+    lastname: ""
   }
 
   // Adding uth-context
   static contextType = AuthContext;
 
-  componentDidUpdate() {
-
-
-    // console.log(this.context);
-  }
   componentDidMount() {
-    if (localStorage.getItem("registered")) {
+    if (localStorage.getItem("authenticated")) {
       this.setState({
-        registered: true
-      })
+        authenticated: true
+      });
+
+      this.props.history.push("list")
     }
+    
   }
+  
+  componentDidUpdate() {}
+  
   inputHandler = (event) => {
     const { name, value } = event.target;
 
@@ -53,16 +49,14 @@ export class Register extends Component {
     if (name.length > 0 && lastname.length > 0) {
       localStorage.setItem("name", name);
       localStorage.setItem("lastname", lastname);
-      localStorage.setItem("registered", "true");
       localStorage.setItem("authenticated", "true");
-
-      this.setState({
+      
+      this.context.login({
         name: name,
         lastname: lastname,
         authenticated: true
-      })
+      });
 
-      this.context.login(this.state)
       this.props.history.push("list");
 
     }
@@ -70,7 +64,7 @@ export class Register extends Component {
   }
 
   render() {
-    const { name, lastname, touched, registered } = this.state;
+    const { name, lastname, touched, authenticated } = this.state;
 
     return (
       <Fragment>
@@ -78,7 +72,7 @@ export class Register extends Component {
           <div className="offset-md-3 col-md-6 col-xs-12 ">
             <form onSubmit={this.onSubmit}>
               <div className="form-group">
-                {registered ? <h1>Login</h1> : <h1>Register</h1>}
+                {authenticated ? <h1>Login</h1> : <h1>Register</h1>}
                 <label htmlFor="exampleInputEmail1">Name*</label>
                 <input type="text" name="name" value={name} onChange={this.inputHandler} onBlur={this.onBlurHandler} className="form-control" id="exampleInputname1" aria-describedby="nameHelp" placeholder="Enter name" />
                 {name.length === 0 && touched &&

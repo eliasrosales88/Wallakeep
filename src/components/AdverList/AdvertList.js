@@ -23,16 +23,21 @@ class AdvertList extends Component {
     Axios.get( "http://localhost:3001/apiv1/anuncios" )
       .then( response => {
         this.setState({advert: response.data.results})
-        console.log(response);
-        
       })
 
       
   }
 
+  componentWillUnmount(){
+    this.context.login({
+      name: localStorage.getItem("name"),
+      lastname: localStorage.getItem("lastname"),
+      authenticated: localStorage.getItem("authenticated"),
+      back: false
+    })
+  }
+
   render() {
-    console.log("Advert");
-    
     const adverts = this.state.advert.map( advert => {
       return <Advert 
         key={advert._id} 

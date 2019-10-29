@@ -7,30 +7,42 @@ import AuthContext from '../../contexts/auth-context';
 import Icon from '@material-ui/core/Icon';
 
 export class Layout extends Component {
-  constructor(props){
-    super(props)
-    console.log(props);    
-  }
+
   static contextType = AuthContext;
 
-  componentDidMount(){
-    console.log(this.context);
-    
-  }
+  componentDidMount(){}
+  
   componentDidUpdate(){
     console.log(this.context);
     
+  }
+
+  logOutHandler = () => {
+   localStorage.clear();
+    
+   this.context.login({
+     name: "",
+     lastname: "",
+     authenticated: false,
+     back: false
+   });
+   this.props.history.replace("/");
   }
 
   render() {
     return (
       <Fragment>
         <nav className="navbar navbar-dark bg-primary">
-
-          <span className="text-white" onClick={this.props.history.goBack}><Icon>arrow_back</Icon></span>
+          {this.context.back &&
+        
+            <span className="text-white" onClick={this.props.history.goBack}><Icon>arrow_back</Icon></span>
+          }
           
-          <h2 className="text-white">Wallakeep</h2>
+          <h2 className="text-white">Wallakeep </h2>
           <span className="text-white">{this.context.name} {this.context.lastname}</span>
+          {this.context.authenticated &&
+            <span className="text-white" onClick={this.logOutHandler}>Logout</span>
+          }
         </nav>
           <main className="container-fluid">
             {this.props.children}

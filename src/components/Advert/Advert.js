@@ -1,6 +1,8 @@
 import React, { Fragment } from 'react';
 import { withRouter } from "react-router-dom";
 
+
+// AÑADIR TAGS!!!!!
 const Advert = ( props ) => {
   const {photo, name, description, price, id, history, buttonsActive = true} = props;
 
@@ -22,7 +24,7 @@ const Advert = ( props ) => {
           <p className="card-text"><b>Precio: { price }$</b></p>
           <p className="card-text">{ description }</p>
           {buttonsActive &&
-          <Fragment>
+            <Fragment>
               <button onClick={detailHandler} className="btn btn-primary">More</button>
               <button onClick={editHandler} className="btn btn-warning ml-1">Edit</button>
             </Fragment>

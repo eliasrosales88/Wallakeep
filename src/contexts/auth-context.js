@@ -4,9 +4,9 @@ import React from "react";
 
 
 const authContext = React.createContext({
-  authenticated: localStorage.getItem("authenticated") || false,
   name: localStorage.getItem("name") || "",
   lastname: localStorage.getItem("lastname") || "",
+  authenticated: localStorage.getItem("authenticated") || false,
   login: () => {}
 });
 
