@@ -6,25 +6,27 @@ import AuthContext from "../../contexts/auth-context";
 export class AdvertForm extends Component {
 
   state = {
-    name: "",
-    description: "",
-    price: "",
-    photo: "",
-    tags: [],
-    type: "",
-    createdAt: "",
-    updatedAt: "",
+    advert:{
+      name: "",
+      description: "",
+      price: "",
+      photo: "",
+      tags: [],
+      type: "",
+      createdAt: "",
+      updatedAt: "",
+    },
+    submitted: false
   };
 
-
   static contextType = AuthContext;
-
-
+  
+  
   componentDidMount(){
-    
+
     Axios.get( "http://localhost:3001/apiv1/anuncios/" + this.props.match.params.id )
     .then( response => {
-      this.setState(response.data.result);
+      this.setState({advert:response.data.result});
     })
 
     this.context.login({
@@ -57,14 +59,18 @@ export class AdvertForm extends Component {
 
   inputHandler = (event) => {
     const { name, value } = event.target;
+
     this.setState({
-      [name]: value
+      advert:{
+        ...this.state.advert,
+        [name]: value 
+      }
     });
   }
 
   handleCheckbox = (event) => {
     const { name } = event.target;
-    const { tags } = this.state;
+    const { tags } = this.state.advert;
     
     let tagsToChange = tags;
 
@@ -80,18 +86,24 @@ export class AdvertForm extends Component {
   
   onSubmit = (event) => {
     event.preventDefault();
+
     
-    Axios.put( "http://localhost:3001/apiv1/anuncios/"+ this.props.match.params.id, this.state )
+    Axios.put( "http://localhost:3001/apiv1/anuncios/"+ this.props.match.params.id, this.state.advert )
     .then( response => {
-      this.setState(response.data.result)
+      this.setState({
+        advert:{...response.data.result},
+        submitted: true
+      });
+      console.log(response.data.result);
+      
     })
 
     }
 
   
   render() {
-    const {  _id, name, description, price, photo, type, createdAt, updatedAt } = this.state;
-   
+    const {  _id, name, description, price, photo, type, createdAt, updatedAt } = this.state.advert;
+    const submitted = this.state.submitted;
     return (
       <Fragment>
         <div className="row mt-4">
@@ -140,47 +152,65 @@ export class AdvertForm extends Component {
                       />
                     </div>
 
-                    <div className="form-group">
-                      <label htmlFor="tags">Tags</label> <br />
-                      <label>lifestyle</label>
+                    <div><b>Tags</b></div> 
+                    <div className="form-check">
                       <input
                         name= "lifestyle"
                         type="checkbox"
-                        checked={this.state.tags.includes("lifestyle")}
+                        className="form-check-input"
+                        checked={this.state.advert.tags.includes("lifestyle")}
                         onChange={this.handleCheckbox}
-                      /> <br />
-                      <label>mobile</label>
+                      />
+                      <label className="form-check-label">lifestyle</label>
+                    </div>
+  
+                    <div className="form-check">
                       <input
                         name= "mobile"
                         type="checkbox"
-                        checked={this.state.tags.includes("mobile")}
+                        className="form-check-input"
+                        checked={this.state.advert.tags.includes("mobile")}
                         onChange={this.handleCheckbox}
-                      /> <br />
-                      <label>motor</label>
+                      />
+                      <label className="form-check-label">mobile</label>
+                    </div>
+  
+                    <div className="form-check">
                       <input
                         name= "motor"
                         type="checkbox"
-                        checked={this.state.tags.includes("motor")}
+                        className="form-check-input"
+                        checked={this.state.advert.tags.includes("motor")}
                         onChange={this.handleCheckbox}
-                      /> <br />
-                      <label>work</label>
+                      />
+                      <label className="form-check-label">motor</label>
+                    </div>
+  
+                    <div className="form-check">
                       <input
                         name= "work"
                         type="checkbox"
-                        checked={this.state.tags.includes("work")}
+                        className="form-check-input"
+                        checked={this.state.advert.tags.includes("work")}
                         onChange={this.handleCheckbox}
-                      /> <br />
+                      />
+                      <label className="form-check-label">work</label>
                     </div>
-
+  
                     <div className="form-group">
                       <div>Type</div>
-                        <select value={type} name="type" onChange={this.inputHandler}>
+                        <select value={type} name="type" className="form-control" onChange={this.inputHandler}>
                           <option value="sell">sell</option>
                           <option value="buy">buy</option>
                         </select>
                     </div>
                   </Fragment>   
                 <button type="submit" className="btn btn-primary disabled">Submit Changes</button>
+                {submitted &&
+                  <Fragment>
+                    <small  className="form-text text-muted">Submitted succesfully!</small>
+                  </Fragment>
+                }
               </form>
             </Fragment>
               }

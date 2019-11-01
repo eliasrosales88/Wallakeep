@@ -42,13 +42,13 @@ export class Layout extends Component {
           
           <h2 className="text-white">Wallakeep </h2>
           <span>
-            <span className="text-white">{this.context.name} {this.context.lastname}</span>
+            <span className="text-white">{this.context.name} {this.context.lastname} |</span>
             {this.context.authenticated &&
-              <span className="text-white ml-1" onClick={this.logOutHandler}>| Logout</span>
+              <span className="text-white ml-1 logout" onClick={this.logOutHandler}>Logout</span>
             }
           </span>
         </nav>
-          <main className="container-fluid">
+          <main className="container-fluid pb-5">
             {this.props.children}
             <Switch>
               <Route exact path="/" component={Register} />
@@ -57,7 +57,7 @@ export class Layout extends Component {
               <Route path="/advert/:id" component={AdvertDetail} />
             </Switch>
           </main>
-        <footer className="bg-dark">Footer</footer>    
+        <footer className="bg-dark p-2 text-center text-white">Wallakeep</footer>    
       </Fragment>
     )
   }
