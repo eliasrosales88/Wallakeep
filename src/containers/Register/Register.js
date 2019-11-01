@@ -73,14 +73,14 @@ export class Register extends Component {
             <form onSubmit={this.onSubmit}>
               <div className="form-group">
                 {authenticated ? <h1>Login</h1> : <h1>Register</h1>}
-                <label htmlFor="exampleInputEmail1">Name*</label>
+                <label htmlFor="name">Name*</label>
                 <input type="text" name="name" value={name} onChange={this.inputHandler} onBlur={this.onBlurHandler} className="form-control" id="exampleInputname1" aria-describedby="nameHelp" placeholder="Enter name" />
                 {name.length === 0 && touched &&
                   <small id="nameHelp" className="form-text text-danger">Name should not be empty</small>
                 }
               </div>
               <div className="form-group">
-                <label htmlFor="exampleInputLastname1">Lastname*</label>
+                <label htmlFor="lastname">Lastname*</label>
                 <input type="text" name="lastname" value={lastname} onChange={this.inputHandler} onBlur={this.onBlurHandler} className="form-control" id="exampleInputLastname1" placeholder=" Enter Lastname" />
                 {lastname.length === 0 && touched &&
                   <small id="lastnameHelp" className="form-text text-danger">Lastname should not be empty</small>

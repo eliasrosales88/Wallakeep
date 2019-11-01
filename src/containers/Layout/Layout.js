@@ -3,6 +3,8 @@ import AdvertList from '../../components/AdverList/AdvertList'
 import { Route, Switch, withRouter } from "react-router-dom";
 import Register from '../Register/Register';
 import AdvertDetail from '../AdvertDetail/AdvertDetail';
+import AdvertForm from '../AdvertForm/AdvertForm';
+
 import AuthContext from '../../contexts/auth-context';
 import Icon from '@material-ui/core/Icon';
 
@@ -39,16 +41,19 @@ export class Layout extends Component {
           }
           
           <h2 className="text-white">Wallakeep </h2>
-          <span className="text-white">{this.context.name} {this.context.lastname}</span>
-          {this.context.authenticated &&
-            <span className="text-white" onClick={this.logOutHandler}>Logout</span>
-          }
+          <span>
+            <span className="text-white">{this.context.name} {this.context.lastname}</span>
+            {this.context.authenticated &&
+              <span className="text-white ml-1" onClick={this.logOutHandler}>| Logout</span>
+            }
+          </span>
         </nav>
           <main className="container-fluid">
             {this.props.children}
             <Switch>
               <Route exact path="/" component={Register} />
               <Route path="/list" component={AdvertList} />
+              <Route path="/advert/:type/:id/" component={AdvertForm} />
               <Route path="/advert/:id" component={AdvertDetail} />
             </Switch>
           </main>

@@ -4,6 +4,7 @@ import Layout from './containers/Layout/Layout';
 import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
 import { BrowserRouter } from "react-router-dom";
 import AuthContext from "./contexts/auth-context";
+import ApiContext from "./contexts/api-context";
 
 class App extends Component {
   state = {
@@ -15,7 +16,6 @@ class App extends Component {
 
   loginHandler = (state) => {
     const { name, lastname, authenticated, back } = state;
-    console.log(state);
     
     this.setState({
         name: name,
@@ -24,7 +24,6 @@ class App extends Component {
         back: back
 
     });
-    console.log(this.state);
     
   }
 
@@ -40,9 +39,11 @@ class App extends Component {
               login: this.loginHandler,
               back: this.state.back
             }}>
-              <Layout>
-                
-              </Layout>
+              <ApiContext.Provider>
+                <Layout>
+                  
+                </Layout>
+              </ApiContext.Provider>
             </AuthContext.Provider>
             </ErrorBoundary>
         </BrowserRouter>

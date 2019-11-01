@@ -4,16 +4,18 @@ import { withRouter } from "react-router-dom";
 
 // AÑADIR TAGS!!!!!
 const Advert = ( props ) => {
-  const {photo, name, description, price, id, history, buttonsActive = true} = props;
-
+  const {photo, name, description, price, id, history, type, tags=[], buttonsActive = true} = props;
+  
   const detailHandler = () => {
-    history.push("advert/"+id)
+    history.push("advert/"+ id)
   }
   
   const editHandler = () => {
-    console.log("edit");
+    console.log("edit id", id);
+    history.push("advert/edit/" + id )
     
   }
+
   
   return (
     <Fragment>
@@ -23,11 +25,23 @@ const Advert = ( props ) => {
           <h5 className="card-title">{ name }</h5>
           <p className="card-text"><b>Precio: { price }$</b></p>
           <p className="card-text">{ description }</p>
+          <p>
+            {type === "sell" ? <span className="badge badge-danger p-2">{type}</span> : <span className="badge badge-success p-2">{type}</span>}
+          </p>
+          {tags.map((tag, index) =>{
+            return (
+              <Fragment key={index}>
+                <span className="badge badge-primary ml-1">{tag}</span>
+              </Fragment>
+            )
+            })
+          }
+
           {buttonsActive &&
-            <Fragment>
+            <div className="mt-1">
               <button onClick={detailHandler} className="btn btn-primary">More</button>
               <button onClick={editHandler} className="btn btn-warning ml-1">Edit</button>
-            </Fragment>
+            </div>  
           }
         </div>
       </div>

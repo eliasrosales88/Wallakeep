@@ -42,7 +42,9 @@ class AdvertList extends Component {
       return <Advert 
         key={advert._id} 
         name={advert.name} 
-        price={advert.price} 
+        price={advert.price}
+        type={advert.type}
+        tags={advert.tags}
         description={advert.description}
         id={advert._id} 
         photo={advert.photo} />

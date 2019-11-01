@@ -17,6 +17,8 @@ export class AdvertDetail extends Component {
   componentDidMount(){
     Axios.get( "http://localhost:3001/apiv1/anuncios/"+ this.props.match.params.id )
     .then( response => {
+      console.log(response.data.result.tags);
+      
       this.setState({advert: response.data.result})
     })
     this.context.login({
@@ -54,8 +56,9 @@ export class AdvertDetail extends Component {
             price={advert.price} 
             description={advert.description}
             id={advert._id} 
+            tags={advert.tags} 
             photo={advert.photo}
-            buttonsActive={false} 
+            buttonsActive={false}
           /> 
         </div>
       </div>
