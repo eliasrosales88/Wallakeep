@@ -120,9 +120,11 @@ class AdvertList extends Component {
 
   }
 
+  createHandler = () =>{
+    this.props.history.push("advert/add/new")
+  }
   render() {
     const { type, tag, priceMin, priceMax } = this.state.filters;
-    console.log(this.state);
     
     const adverts = this.state.advert.map( advert => {
       return <Advert 
@@ -138,8 +140,7 @@ class AdvertList extends Component {
     return (
       <Fragment>
         {/* FILTERS */}
-        <div>Filters</div>
-        <div className="row">
+        <div className="row mt-1">
           <div className="col-xs-12 col-md-3">
             <div className="form-group">
               <div>Type</div>
@@ -174,11 +175,15 @@ class AdvertList extends Component {
                   <input type="submit"className="btn btn-primary" value="price" />
                 </div>
               </div>
-              
             </form>
           </div>
         </div>
         
+        <div className="row">
+          <div className="col-xs-12">
+            <button className="btn btn-success ml-3" onClick={this.createHandler}>Create Advert</button>
+          </div>
+        </div>
 
         {/* ADVERT GRID */}
         <div className="row justify-content-center mt-3">

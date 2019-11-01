@@ -11,7 +11,6 @@ const Advert = ( props ) => {
   }
   
   const editHandler = () => {
-    console.log("edit id", id);
     history.push("advert/edit/" + id )
     
   }
