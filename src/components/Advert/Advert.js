@@ -2,7 +2,6 @@ import React, { Fragment } from 'react';
 import { withRouter } from "react-router-dom";
 
 
-// AÑADIR TAGS!!!!!
 const Advert = ( props ) => {
   const {photo, name, description, price, id, history, type, tags=[], buttonsActive = true} = props;
   

@@ -2,6 +2,10 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Available Scripts
 
+### Backend notice
+Before start please checkout the *README* of this repo https://github.com/IsmaelB83/keepcoding-backend-node  
+It is needed to fetch the data of the react project.
+
 In the project directory, you can run:
 
 ### `npm start`
